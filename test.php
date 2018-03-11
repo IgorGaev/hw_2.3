@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php if ($validate):
-    $selectNumber = $_GET['testNumber'];
+    $selectNumber = (int)$_GET['testNumber'];
     $quest = $data[$selectNumber]['question'];
     $answers = $data[$selectNumber]['answers'];
     $correctAnswerNum = (int)$data[$selectNumber]['correct_answer_num'] ?>
@@ -39,6 +39,13 @@
     $userAnswerNum = (int)++$_POST['answer'];
     if($correctAnswerNum === $userAnswerNum): ?>
         <b><p>Ответ правильный, тест пройден</p></b>
+    <?php $rating = 5;?>
+    <p>Введите Ваше имя</p>
+    <form method="post">
+        <label>
+            <input type="text" name="userName" value="Введи имя">
+        </label>
+        <img src="sertpng.php"/>
     <?php else: ?>
         <b><p>Ответ неправильный, тест не пройден</p></b>
     <?php endif; ?>
