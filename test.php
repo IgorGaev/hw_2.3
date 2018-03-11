@@ -41,12 +41,12 @@ if (!empty($_POST)):
     if($correctAnswerNum === $userAnswerNum): ?>
         <b><p>Ответ правильный, тест пройден</p></b>
         <b><p>Для получения сертификата введите ваше имя</p></b>
-    <?php $rating = 5;?>
-    <form action="sertpng.php" method="post">
+     <form action="sertpng.php" method="post">
         <label>
             <input type="text" name="userName" value="Введи ваше имя">
         </label>
         <input type="submit" value="Ок">
+     </form>
     <?php else: ?>
         <b><p>Ответ неправильный, тест не пройден</p></b>
     <?php endif; ?>
