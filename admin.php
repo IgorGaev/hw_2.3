@@ -1,7 +1,7 @@
 <?php
 if (!empty($_FILES)) {
     move_uploaded_file($_FILES['testfile']['tmp_name'],'tests.json');
-    header('Location: http://localhost/ntgy_hw/hw_2.3/list.php');
+    header('Location: http://university.netology.ru/u/igaev/hw_2.3/list.php');
 }
 ?>
 <!doctype html>
