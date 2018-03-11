@@ -1,37 +1,39 @@
 <?php
-$name = 'Игорь';
-$rating = '5';
-$textName = 'Молодец ' . $name . '!';
-$textRating = 'Оценка: ' . $rating;
-$image = imagecreatetruecolor(300, 424);# генерируем картинку
+if (array_key_exists('userName', $_POST)):
+    $name = (string)$_POST['userName'];
+    $rating = '5';
+    $textName = 'Молодец ' . $name . '!';
+    $textRating = 'Оценка: ' . $rating;
 
-// Устанавливаем цвета
+      // Генерируем сертификат
 
-$backColor = imagecolorallocate($image, 255, 255, 255);
-$textColor = imagecolorallocate($image, 0, 0, 0);
+    $image = imagecreatetruecolor(300, 424);
 
-$boxFile = __DIR__.'/certback.png';
-if (!file_exists($boxFile)) {
-    echo 'Файл с картинкой не найден!';
-    exit;
-}
+    $backColor = imagecolorallocate($image, 255, 255, 255);
+    $textColor = imagecolorallocate($image, 0, 0, 0);
 
-$inBox = imagecreatefrompng($boxFile);
+    $boxFile = __DIR__.'/certback.png';
+    if (!file_exists($boxFile)) {
+        echo 'Файл с картинкой не найден!';
+        exit;
+    }
 
-imagecopy($image, $inBox, 0, 0, 0, 0, 300, 424);
+    $inBox = imagecreatefrompng($boxFile);
 
-$fontFile = __DIR__ . '/times.ttf';
+    imagecopy($image, $inBox, 0, 0, 0, 0, 300, 424);
 
-if (!file_exists($fontFile)) {
-    echo 'Файл с картинкой не найден!';
-    exit;
-}
+    $fontFile = __DIR__ . '/times.ttf';
 
-imagettftext($image, 18, 0, 75, 200, $textColor, $fontFile, $textName);
-imagettftext($image, 18, 0, 100, 240, $textColor, $fontFile, $textRating);
+    if (!file_exists($fontFile)) {
+        echo 'Файл с картинкой не найден!';
+        exit;
+    }
 
-header('Content-Type: image/png');
-imagepng($image);
+    imagettftext($image, 18, 0, 75, 200, $textColor, $fontFile, $textName);
+    imagettftext($image, 18, 0, 100, 240, $textColor, $fontFile, $textRating);
 
-imagedestroy($image);
+    header('Content-Type: image/png');
+    imagepng($image);
 
+    imagedestroy($image);
+    endif;

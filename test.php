@@ -35,17 +35,18 @@
     <h1>404 Not Found</h1>
 <?php endif; ?>
 
-<?php if (!empty($_POST)):
+<?php
+if (!empty($_POST)):
     $userAnswerNum = (int)++$_POST['answer'];
     if($correctAnswerNum === $userAnswerNum): ?>
         <b><p>Ответ правильный, тест пройден</p></b>
+        <b><p>Для получения сертификата введите ваше имя</p></b>
     <?php $rating = 5;?>
-    <p>Введите Ваше имя</p>
-    <form method="post">
+    <form action="sertpng.php" method="post">
         <label>
-            <input type="text" name="userName" value="Введи имя">
+            <input type="text" name="userName" value="Введи ваше имя">
         </label>
-        <img src="sertpng.php"/>
+        <input type="submit" value="Ок">
     <?php else: ?>
         <b><p>Ответ неправильный, тест не пройден</p></b>
     <?php endif; ?>
