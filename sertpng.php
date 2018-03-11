@@ -29,8 +29,8 @@ if (array_key_exists('userName', $_POST)):
         exit;
     }
 
-    imagettftext($image, 18, 0, 75, 200, $textColor, $fontFile, $textName);
-    imagettftext($image, 18, 0, 100, 240, $textColor, $fontFile, $textRating);
+    imagettftext($image, 14, 0, 75, 200, $textColor, $fontFile, $textName);
+    imagettftext($image, 14, 0, 100, 240, $textColor, $fontFile, $textRating);
 
     header('Content-Type: image/png');
     imagepng($image);

@@ -1,3 +1,9 @@
+<?php
+if (!empty($_FILES)) {
+    move_uploaded_file($_FILES['testfile']['tmp_name'],'tests.json');
+    header('Location: http://localhost/ntgy_hw/hw_2.3/list.php');
+}
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -9,7 +15,7 @@
 </head>
 <body>
 <h1>Загрузите файл с тестом</h1>
-<form action="redirect.php" enctype="multipart/form-data" method="post">
+<form action="admin.php" enctype="multipart/form-data" method="post">
     <p><input name="testfile" type="file"></p>
     <input type="submit" value="Загрузить">
 </form>

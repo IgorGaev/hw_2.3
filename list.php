@@ -19,6 +19,7 @@ $data = json_decode(file_get_contents(__DIR__.'/tests.json'), true);
     <?php endforeach?>
 </ol>
 <form action="test.php" method="get">
+    <p>Введите пожалуйста номер теста</p>
     <label>
         <input type="text" name="testNumber">
     </label>
