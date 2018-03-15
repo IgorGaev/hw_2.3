@@ -1,18 +1,18 @@
 <?php
-if (array_key_exists('userName', $_POST)):
+if (array_key_exists('userName', $_POST)) {
     $name = (string)$_POST['userName'];
     $rating = '5';
     $textName = 'Молодец ' . $name . '!';
     $textRating = 'Оценка: ' . $rating;
 
-      // Генерируем сертификат
+    // Генерируем сертификат
 
     $image = imagecreatetruecolor(300, 424);
 
     $backColor = imagecolorallocate($image, 255, 255, 255);
     $textColor = imagecolorallocate($image, 0, 0, 0);
 
-    $boxFile = __DIR__.'/certback.png';
+    $boxFile = __DIR__ . '/certback.png';
     if (!file_exists($boxFile)) {
         echo 'Файл с картинкой не найден!';
         exit;
@@ -26,7 +26,7 @@ if (array_key_exists('userName', $_POST)):
 
     if (!file_exists($fontFile)) {
         echo 'Файл с картинкой не найден!';
-        exit;
+        exit();
     }
 
     imagettftext($image, 14, 0, 75, 200, $textColor, $fontFile, $textName);
@@ -36,4 +36,4 @@ if (array_key_exists('userName', $_POST)):
     imagepng($image);
 
     imagedestroy($image);
-    endif;
+}

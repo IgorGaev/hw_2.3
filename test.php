@@ -3,8 +3,20 @@
         $data = json_decode(file_get_contents(__DIR__ . '/tests.json'), true);
         $filter = FILTER_VALIDATE_INT; # задаем параметры фильтра
         $options = ['options' => ['min_range' => 1,'max_range' => 4]];
-        $validate = filter_input(INPUT_GET, 'testNumber', $filter, $options);}
-?><!doctype html>
+        $validate = filter_input(INPUT_GET, 'testNumber', $filter, $options);
+        if(!$validate) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+            echo '404 Not Found';
+            exit();
+        } else{
+            $selectNumber = (int)$_GET['testNumber'];
+            $quest = $data[$selectNumber]['question'];
+            $answers = $data[$selectNumber]['answers'];
+            $correctAnswerNum = (int)$data[$selectNumber]['correct_answer_num'];
+        }
+    }
+?>
+<!doctype html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -14,27 +26,17 @@
     <title>Document</title>
 </head>
 <body>
-<?php if ($validate):
-    $selectNumber = (int)$_GET['testNumber'];
-    $quest = $data[$selectNumber]['question'];
-    $answers = $data[$selectNumber]['answers'];
-    $correctAnswerNum = (int)$data[$selectNumber]['correct_answer_num'] ?>
-    <h3>Выберите правильный ответ</h3>
-    <form method="post">
-        <p><b><?php echo $quest?></b> <br>
-            <?php foreach ($answers as $answerNum => $answer) : ?>
-                <label>
-                    <input type="radio" name="answer" value="<?php echo $answerNum?>">
-                </label> <?php echo $answer?>
-        </p>
-            <?php endforeach;?>
-        <input type="submit" value="Выбрать">
-    </form>
-<?php else:
-    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');?>
-    <h1>404 Not Found</h1>
-<?php endif; ?>
-
+<h3>Выберите правильный ответ</h3>
+<form method="post">
+   <p><b><?php echo $quest?></b> <br>
+      <?php foreach ($answers as $answerNum => $answer) : ?>
+         <label>
+            <input type="radio" name="answer" value="<?php echo $answerNum?>">
+         </label> <?php echo $answer?>
+   </p>
+      <?php endforeach;?>
+   <input type="submit" value="Выбрать">
+</form>
 <?php
 if (!empty($_POST)):
     $userAnswerNum = (int)++$_POST['answer'];
